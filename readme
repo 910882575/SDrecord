@@ -1,0 +1,14 @@
+python rec.py -l >list.txt
+python rec.py -d 1 -r 48000 -c 2 -t PCM_24 PC_2mic.wav
+
+python rec.py -d 35 -r 48000 -c 4 -t PCM_24  PC_4mic.wav
+
+python playrec.py -din 10 -dout 12 -c 2 -fin micin.wav -fout ref_short.wav |sox ref_short.wav micin.wav ref_short+micin.wav -M
+python playrec.py -din 10 -dout 12 -c 4 -fin micin.wav -fout ref_long.wav |sox ref_long.wav micin.wav ref_long+micin.wav -M
+
+
+
+python playrec.py -din 35 -dout 35 -c 8 -fin testin.wav -fout test.wav
+python rec.py -d 21 -r 48000 -c 8 -t PCM_24 PC_8mic.wav
+
+sox -t raw -c 1 -e signed-integer -b 16 -r 48000 ref.raw ref.wav
